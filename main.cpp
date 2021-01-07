@@ -6,6 +6,7 @@
 #include <cmath>
 #include <graphics.h>
 #include <limits.h>
+#include <shellapi.h>
 #include "lang.hpp"
 #include "startPage.hpp"
 

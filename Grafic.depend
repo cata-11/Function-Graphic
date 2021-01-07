@@ -457,13 +457,14 @@
 
 1610042809 c:\users\pct\desktop\_grafic_v2.1\drawgraph.hpp
 
-1610043492 source:d:\codeblocks\_grafic\_grafic_v2.2\main.cpp
+1610051295 source:d:\codeblocks\_grafic\_grafic_v2.2\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	<cmath>
 	<graphics.h>
 	<limits.h>
+	<shellapi.h>
 	"lang.hpp"
 	"startPage.hpp"
 
@@ -492,5 +493,5 @@
 	"structures.hpp"
 	<string.h>
 
-1610050139 d:\codeblocks\_grafic\_grafic_v2.2\drawgraph.hpp
+1610052204 d:\codeblocks\_grafic\_grafic_v2.2\drawgraph.hpp
 

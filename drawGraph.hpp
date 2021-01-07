@@ -618,6 +618,7 @@ void click_handler_three(int x, int y)
             writeimagefile("graphic.bmp",0,0,getmaxx()-62,getmaxy()-62);
             settextjustify(CENTER_TEXT,CENTER_TEXT);
             outtextxy(getmaxx()/2,45,L.lang[21+L.l]);
+            ShellExecute(NULL, "open", "graphic.bmp", NULL, NULL, 0);
         }
         if(x > btns3[4].x1 && x < btns3[4].x2 && y > btns3[4].y1 && y < btns3[4].y2) // new
         {
