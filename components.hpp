@@ -1,4 +1,25 @@
-#include "globalVars.hpp"
+void drawExitBtn(struct buttons *btn){
+    setcolor(COLOR(255,0,0));
+    setlinestyle(0,0,2);
+    circle(getmaxx()-32,33,20);
+    line(getmaxx()-40,40,getmaxx()-25,25);
+    line(getmaxx()-40,25,getmaxx()-25,40);
+    btn[49].x1 = getmaxx()-32-10;
+    btn[49].y1 = 33-10;
+    btn[49].x2 = getmaxx()-32+10;
+    btn[49].y2 = 33+10;
+}
+void drawGoBackBtn(struct buttons *btn)
+{
+    setcolor(DARKGRAY);
+    circle(53,35,20);
+    line(55,30,50,35);
+    line(55,40,50,35);
+    btn[50].x1 = 35;
+    btn[50].y1 = 15;
+    btn[50].x2 = 75;
+    btn[50].y2 = 55;
+}
 void drawInputField(char s[])
 {
     setcolor(0);
@@ -78,7 +99,7 @@ void drawNextStepButton(int x1, int y1, int x2, int y2, struct buttons *btn)
     settextjustify(CENTER_TEXT,CENTER_TEXT);
     settextstyle(COMPLEX_FONT,HORIZ_DIR,4);
     setcolor(MAGENTA);
-    outtextxy(windowWidth/2,windowHeight-windowHeight/4+100,"URMATORUL PAS");
+    outtextxy(W.width/2,W.height-W.height/4+100,L.lang[12+L.l]);
     settextjustify(0,0);
     rectangle(x1,y1,x2,y2);
     btn[42].x1=x1;
@@ -90,7 +111,7 @@ void resetInput()
 {
     setfillstyle(SOLID_FILL,WHITE);
     setcolor(BLACK);
-    rectangle(30,70,windowWidth-30,250);
+    rectangle(30,70,W.width-30,250);
     floodfill(35,75,BLACK);
     setcolor(GREEN);
 }

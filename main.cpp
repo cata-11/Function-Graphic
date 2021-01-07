@@ -1,19 +1,22 @@
+#define infinit INT_MAX
+#define epsi 0.0001
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <cmath>
 #include <graphics.h>
-#include "firstPage.hpp"
-
+#include <limits.h>
+#include "lang.hpp"
+#include "startPage.hpp"
 
 int main()
 {
-    initwindow(windowWidth, windowHeight, "", (GetSystemMetrics(SM_CXSCREEN) - windowWidth)/2, (GetSystemMetrics(SM_CYSCREEN) - windowHeight)/2);
+    initwindow(W.width, W.height, "", (GetSystemMetrics(SM_CXSCREEN) - W.width)/2, (GetSystemMetrics(SM_CYSCREEN) - W.height)/2);
     setbkcolor(15);
     cleardevice();
-    drawPageOne();
-    registermousehandler(WM_LBUTTONDOWN, click_handler_one);
-
+    registermousehandler(WM_LBUTTONDOWN, click_handler_menu);
+    updateLanguage();
+    start();
     getch();
     return 0;
 }

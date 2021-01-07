@@ -1,13 +1,5 @@
-
-struct stiva {
-    char info;
-    stiva *urm;
-};
-
-struct stiva2{
-    double info;
-    stiva2 *urm;
-};
+#include "structures.hpp"
+#include <string.h>
 
 int priority(char p)
 {
@@ -23,8 +15,12 @@ int priority(char p)
         return 4;
     if( p == '^')
         return 5;
-    if( p == 'c' || p == 's' || p == 'l' || p == 'a' || p == 'r' || p == 'e' || p == 'q' || p == 'o')
+    if(p == '<' || p == '>')
         return 6;
+    if(p == '=')
+        return 7;
+    if( p == 'c' || p == 's' || p == 'l' || p == 'a' || p == 'r' || p == 'e' || p == 'q' || p == 'o')
+        return 8;
     return -1;
 }
 
@@ -35,21 +31,36 @@ bool opr(char c[], int &t)
         t = 2;
         return true;
     }
-    else if(!strncmp(c,"ln",2))
+    else if(!strncmp(c,"ln",2) || !strncmp(c,"og",2))
     {
         t = 1;
-        return true;
-    }
-    else if(!strncmp(c,"og10",4))
-    {
-        t = 3;
         return true;
     }
     return false;
 }
 
-double operatie(double x, double y, char c)
+double operatie(double x, double y, char c, char e[],int &color,int &k)
 {
+    if(c == '=')
+        return x == y;
+    if(c == '>')
+    {
+        if(x < y)
+        {
+            k=1;
+            color = 3;
+        }
+        return x < y;
+    }
+    if(c == '<')
+    {
+        if(x > y)
+        {
+            k=1;
+            color = 1;
+        }
+        return x > y;
+    }
     if(c == '+')
         return x + y;
     if(c == '-')
@@ -57,7 +68,12 @@ double operatie(double x, double y, char c)
     if(c == '*')
         return x * y;
     if(c == '/')
-        return y / x;
+    {
+        if(x == 0)
+            strcpy(e,"error");
+        else
+            return y / x;
+    }
     if(c == '^')
         return pow(y,x);
     if(c == 's')
@@ -67,21 +83,30 @@ double operatie(double x, double y, char c)
     if(c == 'a')
         return abs(x);
     if(c == 'l')
-        return log(x);
+    {
+        if(x < 0)
+            strcpy(e,"error");
+        else
+            return log(x);
+    }
     if(c == 'o')
-        return log10(x);
+    {
+        if(x < 0)
+            strcpy(e,"error");
+        else
+            return log10(x);
+    }
     if(c == 'q')
     {
         if(x >= 0)
             return sqrt(x);
         else
-            return -1;
+            strcpy(e,"error");
     }
     if(c == 'e')
         return exp(x);
-    return -1;
+    return getmaxx()+1;
 }
-
 
 void push(stiva2* &f, double x)
 {
@@ -113,34 +138,41 @@ void pop(stiva2* &f)
     delete deSters;
 }
 
-
-double evaluator(char c[], double x)
+double evaluator(char c[], double x, char e[],int &color)
 {
-    char op[] = "()+-*/^";
+    char op[] = "+-*/^<>",aux[256];
+    int k=0,m=1;
     int t,z=0;
-    stiva *s;
-    stiva2 *f;
-    strcpy(c+1,c);
-    c[0] = '(';
+    stiva *s = NULL;
+    stiva2 *f = NULL;
+    strcpy(e,"*");
     pushC(s,'(');
-    strcat(c,")");
     for(int i = 1; i < strlen(c); i++)
     {
+        if(c[i] == '(')
+            m++;
+        if(c[i] == ')')
+            m--;
+        if((strchr(op,c[i]) && strchr(op,c[i+1])) || (c[i] == ')' && c[i+1] == '(') || m < 0)
+        {
+            strcpy(e,"error");
+            return getmaxx()+1;
+        }
         int y = priority(c[i]);
         if((c[i] == 's' && c[i+1] == 'q') || (c[i] == 'l' && c[i+1] == 'o'))
             i++;
         if(y != -1 && (y > priority(s->info) || c[i] == '('))
+        {
+            if(opr(c+i,t))
             {
-                if(opr(c+i,t))
-                {
-                    pushC(s,c[i]);
-                    i+=t;
-                }
-                else if(c[i] == '-' && c[i-1] == '(')
-                    z = 1;
-                else
-                    pushC(s,c[i]);
+                pushC(s,c[i]);
+                i+=t;
             }
+            else if(c[i] == '-' && c[i-1] == '(')
+                z = 1;
+            else
+                pushC(s,c[i]);
+        }
         else if(c[i] == 'x')
         {
             if(z == 1)
@@ -190,21 +222,58 @@ double evaluator(char c[], double x)
         {
             while(y < priority(s->info) && s != NULL)
             {
+                if(f == NULL)
+                {
+                    strcpy(e,"error");
+                    return getmaxx()+1;
+                }
                 double d = f->info,g;
                 pop(f);
-                if(strchr(op,s->info))
+                if(strchr(op,s->info) || s->info == '=')
                 {
+                    if(f == NULL)
+                    {
+                        strcpy(e,"error");
+                        return getmaxx()+1;
+                    }
                     g = f->info;
                     pop(f);
-                    push(f,operatie(d,g,s->info));
+                    char h = s->info;
                     popC(s);
+                    if(h == '=' && (s->info == '>' || s->info == '<'))
+                    {
+                        double u;
+                        if(s->info == '>')
+                        {
+                            u = g >= d;
+                            if(u)
+                            {
+                                k=1;
+                                color = 3;
+                            }
+                        }
+                        else
+                        {
+                            u = g <= d;
+                            if(u)
+                            {
+                                k=1;
+                                color = 1;
+                            }
+                        }
+                        push(f,u);
+                        popC(s);
+                    }
+                    else
+                        push(f,operatie(d,g,h,e,color,k));
                 }
                 else
                 {
-                    push(f,operatie(d,1,s->info));
+                    push(f,operatie(d,1,s->info,e,color,k));
                     popC(s);
                 }
-
+                if(strcmp(e,"error") == 0)
+                    return getmaxx()+1;
             }
             if(s->info == '(' && c[i] == ')')
                 popC(s);
@@ -213,8 +282,61 @@ double evaluator(char c[], double x)
         }
 
     }
-    //printf("\neval info: %lf\n",f->info);
+    if(k == 0 && (strchr(c,'<') || strchr(c,'<')))
+    {
+
+        return getmaxx()+1;
+    }
+
+    if(s != NULL || m > 0 || f->urm != NULL)
+    {
+        strcpy(e,"error");
+        return getmaxx()+1;
+    }
     return f->info;
 }
 
+double asimp_oriz(char c[],char e[])
+{
+    double l;
+    int y;
+    l = evaluator(c,infinit,e,y);
+    if(abs(infinit-abs(l)) > infinit / 2)
+        return l;
+    else
+        return infinit;
+}
 
+bool asimp_obl(char c[],char e[],double &m, double &n)
+{
+    int y;
+    double x;
+    m = evaluator(c,infinit,e,y) / infinit;
+    if(abs(infinit-abs(m)) <= infinit / 2 && m!=0)
+        return false;
+    x = infinit * int(m);
+    n = evaluator(c,infinit,e,y) - x;
+    if(abs(infinit-abs(n)) <= infinit / 2)
+        return false;
+    return true;
+}
+
+void asimp_vert()
+{
+    int h;
+    if(G.cadran == 0 || G.cadran == 6 || G.cadran == 8)
+        h = -1;
+    else
+        h = 0;
+    for(int i=0; i < G.nr_points-2; i++)
+        if(abs(P[i+1].y-P[i].y) > 20 && abs(P[i-1].y-P[i].y) > 20 && h < 1 && G.asim != 0)
+        {
+            G.asim--;
+            setcolor(3);
+            h++;
+            setlinestyle(1,0,2);
+            line(P[i].x*G.zoomx+G.mid.x,0,P[i].x*G.zoomx+G.mid.x,getmaxy());
+        }
+        else
+            h = 0;
+}

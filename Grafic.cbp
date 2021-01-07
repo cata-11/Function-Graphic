@@ -32,17 +32,20 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="AboutE.txt" />
+		<Unit filename="AboutR.txt" />
 		<Unit filename="components.hpp" />
 		<Unit filename="drawGraph.hpp" />
 		<Unit filename="eval.hpp" />
-		<Unit filename="eval2.hpp" />
 		<Unit filename="firstPage.hpp" />
-		<Unit filename="globalVars.hpp" />
 		<Unit filename="input.txt" />
+		<Unit filename="lang.hpp" />
+		<Unit filename="language.txt" />
 		<Unit filename="main.cpp" />
 		<Unit filename="pageOneBtns.txt" />
 		<Unit filename="pageTwoBtns.txt" />
 		<Unit filename="secondPage.hpp" />
+		<Unit filename="startPage.hpp" />
 		<Unit filename="structures.hpp" />
 		<Extensions />
 	</Project>
