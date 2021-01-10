@@ -3,24 +3,26 @@
 
 int priority(char p)
 {
-    if( p == ')' || p == '(')
+    if( p == '(')
         return 0;
-    if( p == '+')
+    if( p == ')')
         return 1;
-    if( p == '-')
+    if( p == '+')
         return 2;
-    if( p == '*')
+    if( p == '-')
         return 3;
-    if( p == '/')
+    if( p == '*')
         return 4;
-    if( p == '^')
+    if( p == '/')
         return 5;
-    if(p == '<' || p == '>')
+    if( p == '^')
         return 6;
-    if(p == '=')
+    if(p == '<' || p == '>')
         return 7;
-    if( p == 'c' || p == 's' || p == 'l' || p == 'a' || p == 'r' || p == 'e' || p == 'q' || p == 'o')
+    if(p == '=')
         return 8;
+    if( p == 'c' || p == 's' || p == 'l' || p == 'a' || p == 'r' || p == 'e' || p == 'q' || p == 'o')
+        return 9;
     return -1;
 }
 
@@ -143,6 +145,7 @@ double evaluator(char c[], double x, char e[],int &color)
     char op[] = "+-*/^<>",aux[256];
     int k=0,m=1;
     int t,z=0;
+    color = 2;
     stiva *s = NULL;
     stiva2 *f = NULL;
     strcpy(e,"*");
@@ -161,7 +164,7 @@ double evaluator(char c[], double x, char e[],int &color)
         int y = priority(c[i]);
         if((c[i] == 's' && c[i+1] == 'q') || (c[i] == 'l' && c[i+1] == 'o'))
             i++;
-        if(y != -1 && (y > priority(s->info) || c[i] == '('))
+        if(y != -1 && (y > priority(s->info) || c[i] == '(') && c[i] != ')')
         {
             if(opr(c+i,t))
             {
@@ -220,7 +223,7 @@ double evaluator(char c[], double x, char e[],int &color)
         }
         else
         {
-            while(y < priority(s->info) && s != NULL)
+            while(y <= priority(s->info) && s != NULL)
             {
                 if(f == NULL)
                 {

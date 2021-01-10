@@ -1,6 +1,8 @@
-double eval(double x, int &color)
+void drawPageOne();
+bool showMinMax = false, showAsimp = false, showPoints = false;
+void eval(points &C)
 {
-    return evaluator(F.funct,x,F.e,color);
+    C.y = -evaluator(F.funct,C.x,C.e,C.color);
 }
 void MIN()
 {
@@ -42,7 +44,7 @@ void calcPoints()
     for(int i=G.left_screen; i<=G.right_screen; i++)
     {
         P[k].x = i/10.0;
-        P[k].y = -eval(P[k].x,P[k].color);
+        eval(P[k]);
         k++;
     }
     G.nr_points = k;
@@ -415,7 +417,7 @@ void drawGraph()
             setcolor(P[i].color);
             setlinestyle(0,0,3);
             if(strcmp(P[i].e,"error") && strcmp(P[i+1].e,"error") && P[i].color == P[i+1].color &&
-                    P[i].y != (getmaxx()+1) && P[i+1].y != (getmaxx()+1) && !(abs(P[i+1].x-P[i].x) > 20 || abs(P[i+1].y-P[i].y) > 20))
+                    (P[i].y != (getmaxx()+1) && P[i+1].y != (getmaxx()+1)) && !(abs(P[i+1].x-P[i].x) > 20 || abs(P[i+1].y-P[i].y) > 20))
             {
                 line(P[i].x*G.zoomx+G.mid.x,P[i].y*G.zoomy+G.mid.y,P[i+1].x*G.zoomx+G.mid.x,P[i+1].y*G.zoomy+G.mid.y);
                 h = 0;
@@ -545,8 +547,9 @@ void drawAsimp()
     {
         double m,n;
         int y;
+        char e[6];
         bool asimp = asimp_obl(s,e,m,n);
-        if((m*G.left+n == eval(G.left,y)) && (m*G.right+n == eval(G.right,y)))
+        if((m*G.left+n == evaluator(F.funct,G.left,e,y)) && (m*G.right+n == evaluator(F.funct,G.right,e,y)))
             return;
         if(asimp)
         {
@@ -556,7 +559,6 @@ void drawAsimp()
         }
     }
 }
-bool showMinMax = false, showAsimp = false, showPoints = false;
 void zoom()
 {
     setbkcolor(15);
@@ -585,7 +587,6 @@ void zoom()
     drawBtns();
 
 }
-void drawPageOne();
 void click_handler_three(int x, int y)
 {
     //printf("x: %d\n", x);

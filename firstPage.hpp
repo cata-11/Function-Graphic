@@ -132,9 +132,9 @@ void click_handler_one(int x,int y)
 
 
         if(x > btns1[50].x1 && x < btns1[50].x2 && y > btns1[50].y1 && y < btns1[50].y2) /// prev step
-           start();
+            start();
         if(x > btns1[49].x1 && x < btns1[49].x2 && y > btns1[49].y1 && y < btns1[49].y2) /// prev step
-           exit(1);
+            exit(1);
 
 
     }
@@ -221,9 +221,9 @@ void drawPageOne()
 
     if(temp)
     {
-    setcolor(GREEN);
-    settextstyle(COMPLEX_FONT,HORIZ_DIR,5);
-    outtextxy(rect.text.x,rect.text.y,temp);
+        setcolor(GREEN);
+        settextstyle(COMPLEX_FONT,HORIZ_DIR,5);
+        outtextxy(rect.text.x,rect.text.y,temp);
     }
 
 }

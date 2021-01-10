@@ -495,3 +495,117 @@
 
 1610052204 d:\codeblocks\_grafic\_grafic_v2.2\drawgraph.hpp
 
+1610051295 source:d:\codeblocks\_grafic\_grafic_v2.2_final\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<cmath>
+	<graphics.h>
+	<limits.h>
+	<shellapi.h>
+	"lang.hpp"
+	"startPage.hpp"
+
+1610036031 d:\codeblocks\_grafic\_grafic_v2.2_final\lang.hpp
+	"structures.hpp"
+
+1610041745 d:\codeblocks\_grafic\_grafic_v2.2_final\structures.hpp
+
+1610049706 d:\codeblocks\_grafic\_grafic_v2.2_final\startpage.hpp
+	"firstPage.hpp"
+	<Windows.h>
+
+1610092356 d:\codeblocks\_grafic\_grafic_v2.2_final\firstpage.hpp
+	"structures.hpp"
+	"components.hpp"
+	"secondPage.hpp"
+
+1610050528 d:\codeblocks\_grafic\_grafic_v2.2_final\components.hpp
+
+1610049783 d:\codeblocks\_grafic\_grafic_v2.2_final\secondpage.hpp
+	"structures.hpp"
+	"eval.hpp"
+	"drawGraph.hpp"
+
+1610273695 d:\codeblocks\_grafic\_grafic_v2.2_final\eval.hpp
+	"structures.hpp"
+	<string.h>
+
+1610205478 d:\codeblocks\_grafic\_grafic_v2.2_final\drawgraph.hpp
+
+1610274665 source:c:\users\pct\desktop\_grafic_v2.2\_grafic_v2.2\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<cmath>
+	<graphics.h>
+	<limits.h>
+	<shellapi.h>
+	"lang.hpp"
+	"startPage.hpp"
+
+1610036031 c:\users\pct\desktop\_grafic_v2.2\_grafic_v2.2\lang.hpp
+	"structures.hpp"
+
+1610041745 c:\users\pct\desktop\_grafic_v2.2\_grafic_v2.2\structures.hpp
+
+1610049706 c:\users\pct\desktop\_grafic_v2.2\_grafic_v2.2\startpage.hpp
+	"firstPage.hpp"
+	<Windows.h>
+
+1610092356 c:\users\pct\desktop\_grafic_v2.2\_grafic_v2.2\firstpage.hpp
+	"structures.hpp"
+	"components.hpp"
+	"secondPage.hpp"
+
+1610050528 c:\users\pct\desktop\_grafic_v2.2\_grafic_v2.2\components.hpp
+
+1610049783 c:\users\pct\desktop\_grafic_v2.2\_grafic_v2.2\secondpage.hpp
+	"structures.hpp"
+	"eval.hpp"
+	"drawGraph.hpp"
+
+1610296653 c:\users\pct\desktop\_grafic_v2.2\_grafic_v2.2\eval.hpp
+	"structures.hpp"
+	<string.h>
+
+1610296507 c:\users\pct\desktop\_grafic_v2.2\_grafic_v2.2\drawgraph.hpp
+
+1610274665 source:d:\codeblocks\_grafic\_grafic_v2.4\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<cmath>
+	<graphics.h>
+	<limits.h>
+	<shellapi.h>
+	"lang.hpp"
+	"startPage.hpp"
+
+1610036031 d:\codeblocks\_grafic\_grafic_v2.4\lang.hpp
+	"structures.hpp"
+
+1610041745 d:\codeblocks\_grafic\_grafic_v2.4\structures.hpp
+
+1610049706 d:\codeblocks\_grafic\_grafic_v2.4\startpage.hpp
+	"firstPage.hpp"
+	<Windows.h>
+
+1610092356 d:\codeblocks\_grafic\_grafic_v2.4\firstpage.hpp
+	"structures.hpp"
+	"components.hpp"
+	"secondPage.hpp"
+
+1610050528 d:\codeblocks\_grafic\_grafic_v2.4\components.hpp
+
+1610049783 d:\codeblocks\_grafic\_grafic_v2.4\secondpage.hpp
+	"structures.hpp"
+	"eval.hpp"
+	"drawGraph.hpp"
+
+1610296653 d:\codeblocks\_grafic\_grafic_v2.4\eval.hpp
+	"structures.hpp"
+	<string.h>
+
+1610296507 d:\codeblocks\_grafic\_grafic_v2.4\drawgraph.hpp
+
